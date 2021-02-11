@@ -19,7 +19,7 @@ public class IssueController {
     }
 
     @PostMapping(value = "/issue/add", produces = {"application/json"})
-    public void addIssue(@RequestBody Issue issue) {
+    public @ResponseBody void addIssue(@RequestBody Issue issue) {
         issueRepository.save(issue);
     }
 
@@ -43,7 +43,12 @@ public class IssueController {
     }
 
     @GetMapping(value = "/issue/all", produces = {"application/json"})
-    public Iterable<Issue> getAllSongs() {
+    public @ResponseBody Iterable<Issue> getAllSongs() {
         return issueRepository.findAll();
+    }
+
+    @DeleteMapping(value = "/issue/delete/all")
+    public void deleteAllIssues() {
+        issueRepository.deleteAll();
     }
 }

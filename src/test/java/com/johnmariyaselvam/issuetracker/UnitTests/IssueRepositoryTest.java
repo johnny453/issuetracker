@@ -6,14 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.annotation.Rollback;
-
-import java.util.List;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@Rollback(false)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class IssueRepositoryTest {
 
 
@@ -29,11 +27,6 @@ public class IssueRepositoryTest {
             "When I click on 'Record' and deny the microphone permission, audio starts recording", "Amy", "In Testing", "Low");
     Issue issue3 = new Issue(3, "Scroller does not scroll down",
             "I am not able to scroll down the webpage", "Claire", "In Development", "High");
-
-
-    List<Issue> issues;
-
-    //SET UP AND BEFORE AND AFTER TEST METHODS!!!!!!
 
     @Test
     public void addIssue() {
@@ -68,6 +61,7 @@ public class IssueRepositoryTest {
         issueRepository.deleteAll();
         assertThat(issueRepository.count()).isEqualTo(0);
 
+
         }
 
     @Test
@@ -83,10 +77,16 @@ public class IssueRepositoryTest {
     public void updateIssue() {
 
         issueRepository.save(issue1);
-        issueRepository.delete(issue1);
-        issueRepository.save(new Issue(1, "Charts is spelled incorrectly",
-                "In the charts page, the charts header is spelled as 'CHrs'", "John", "In Development", "High"));
-        issueRepository.findByTitle("Charts is spelled incorrectly");
+
+        issue1.setTitle("Charts is spelled incorrectly");
+        issue1.setSummary("In the charts page, the charts header is spelled as 'Chrts'");
+        issue1.setReporter("Jamie");
+        issue1.setStatus("In Development");
+        issue1.setSeverity("Low");
+
+        issueRepository.save(issue1);
+        assertThat(issue1.getTitle()).isEqualTo("Charts is spelled incorrectly");
+
     }
 
 }
