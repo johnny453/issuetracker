@@ -14,7 +14,7 @@ public class Issue {
     private String title;
     private String summary;
     private String reporter;
-    private String status = "Backlog";
+    private String status;
     private String severity;
 
     public Issue() {
