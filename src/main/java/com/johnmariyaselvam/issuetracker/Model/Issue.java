@@ -1,20 +1,29 @@
 package com.johnmariyaselvam.issuetracker.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name= "issue")
 public class Issue {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id", length = 36 , updatable = false, nullable = false)
     private Integer id;
+
+    @Column(name="title")
     private String title;
+
+    @Column(name="summary")
     private String summary;
+
+    @Column(name="reporter")
     private String reporter;
+
+    @Column(name="status")
     private String status;
+
+    @Column(name="severity")
     private String severity;
 
     public Issue() {
@@ -22,7 +31,6 @@ public class Issue {
     }
 
     public Issue(Integer id, String title, String summary, String reporter, String status, String severity) {
-        super();
         this.id = id;
         this.title = title;
         this.summary = summary;
