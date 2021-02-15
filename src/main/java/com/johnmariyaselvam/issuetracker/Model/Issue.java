@@ -8,7 +8,6 @@ public class Issue {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", length = 36 , updatable = false, nullable = false)
     private Integer id;
 
     @Column(name="title")

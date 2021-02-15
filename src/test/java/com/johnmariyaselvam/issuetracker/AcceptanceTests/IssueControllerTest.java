@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
+@ActiveProfiles("test")
 public class IssueControllerTest {
 
     @Autowired
@@ -97,17 +98,16 @@ public class IssueControllerTest {
     @Test
     public void deleteIssue() throws Exception {
 
-        Issue newIssue = new Issue();
-        newIssue.setTitle("Blue line when navigating to Home screen");
-        newIssue.setSummary("When I navigate to the home screen, I see a blue line.");
-        newIssue.setReporter("Abigail");
-        newIssue.setStatus("In Testing");
-        newIssue.setSeverity("Critical");
+
+        this.mockMvc.perform(delete("/issue/delete/1").contentType("application/json"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateIssue() throws Exception {
 
 
-        this.mockMvc.perform(delete("/issue/delete/1").contentType("application/json")
-                .content(String.valueOf(newIssue)))
-                .andDo(print())
+        this.mockMvc.perform(put("/issue/update/1").contentType("application/json"))
                 .andExpect(status().isOk());
     }
 
