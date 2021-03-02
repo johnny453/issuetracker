@@ -12,7 +12,7 @@ Issue tracker is an RESTful API app that tracks bugs which users can create, rea
 
 Issues to be fixed:
 - Spring Boot: 
-  - Integration (Controller web mvc) tests: These currently do not work. 
+  - ~~Integration (Controller web mvc) tests: These currently do not work.
 
 - ReactJS:
   - When clicking the 'Add Issue' button and navigating back, an empty row is created. 
