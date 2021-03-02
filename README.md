@@ -20,6 +20,7 @@ Issues to be fixed:
 
 Features to be added:
 - Deploying app to Heroku
+- Adding CI integration. 
 - Security to prevent unauthorised access to the database.
 - Login page and admin access to restrict certain methods like deleteAllIssues. 
 - Search for issues using filters 
